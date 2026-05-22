@@ -1,0 +1,53 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Category {
+  id          String    @id @default(cuid())
+  name        String
+  slug        String    @unique
+  description String?
+  seoTitle    String?
+  seoDesc     String?
+  messages    Message[]
+}
+
+model Festival {
+  id          String    @id @default(cuid())
+  name        String
+  slug        String    @unique
+  date        String?   // Store date as MM-DD format or YYYY-MM-DD
+  description String?
+  messages    Message[]
+}
+
+model Message {
+  id         String    @id @default(cuid())
+  content    String
+  categoryId String
+  category   Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  festivalId String?
+  festival   Festival? @relation(fields: [festivalId], references: [id], onDelete: SetNull)
+  language   String    @default("Hindi")
+  tone       String?   // e.g., Devotional, Funny, Traditional
+  createdAt  DateTime  @default(now())
+}
+
+model DailyContent {
+  id        String   @id @default(cuid())
+  date      String   @unique // format: YYYY-MM-DD
+  message   String   // The main message of the day
+  quote     String   // The Suvichar of the day
+  panchang  String   // JSON string or long text with Panchang details
+  rashifal  String   // JSON string or long text with Rashifal details
+  bgImage   String   @default("sunrise") // background gradient/template identifier
+  createdAt DateTime @default(now())
+}

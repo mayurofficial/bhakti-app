@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-poppins), sans-serif;
+  --font-display: var(--font-rozha), serif;
+  
+  --color-saffron-light: #fff3e0;
+  --color-saffron-medium: #ffb74d;
+  --color-saffron: #ff9800;
+  --color-saffron-dark: #e65100;
+  
+  --color-gold-light: #fffde7;
+  --color-gold: #d4af37;
+  --color-gold-dark: #aa8000;
+  
+  --color-warm-beige: #faf6f0;
+  --color-warm-cream: #fbf9f6;
+  --color-temple-maroon: #8e1c19;
+}
+
+body {
+  background-color: var(--color-warm-beige);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+/* Beautiful custom marigold border utility for devotional elements */
+.marigold-border {
+  border-image: repeating-linear-gradient(45deg, #ff9800, #ff9800 10px, #8e1c19 10px, #8e1c19 20px) 15;
+  border-width: 4px;
+  border-style: solid;
+}
+
+/* Smooth float micro-animation for bells, diyas, or cards */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Simple shimmering loader */
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 152, 0, 0.05) 25%,
+    rgba(255, 152, 0, 0.15) 50%,
+    rgba(255, 152, 0, 0.05) 75%
+  );
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
